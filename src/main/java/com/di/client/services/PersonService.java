@@ -11,6 +11,7 @@ import javax.ws.rs.Produces;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.di.common.controller.PersonController;
+import com.di.common.controller.impl.PersonControllerImpl;
 import com.di.common.model.Person;
 
 @Path("person")
@@ -21,6 +22,9 @@ public class PersonService {
 	@GET
 	@Produces("application/xml")
 	public String getAll() {
+		if (personController == null) {
+			personController = new PersonControllerImpl();
+		}
 		List<Person> people = personController.getAll();
 		StringBuilder sb = new  StringBuilder();
 		sb.append("<people>");
